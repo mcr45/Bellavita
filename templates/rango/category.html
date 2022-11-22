@@ -1,0 +1,30 @@
+
+{% extends 'rango/base.html' %}
+{% load static %}
+
+	{% block tt %}
+	{% if category %}
+	{{category.name}}
+	{% else %}
+	Unloso category
+	{% endif %}
+
+	{% endblock %}
+
+{% block body %}
+		{% if category %}
+			<h1>{{category.name}}</h1>
+			{% if pages %}
+			<ul>
+				{%for page in pages %}
+				<li><a href="{{page.url}}">{{page.title}}</a></li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<strong> No pages in category </strong>
+			{% endif %}
+			<a href="{% url 'rango:add_page' category.slug %}">Add Page</a>
+		{% else %}
+			The category does....does not exist.
+		{% endif %}	
+{% endblock %}

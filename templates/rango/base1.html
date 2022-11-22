@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+{% load rango_template_tags  %}
+<html>
+<head lang="es">
+	<title>Ration -
+		{% block tt %}
+		OK letsgooo
+		{% endblock %}
+
+	</title>
+</head>
+<body>
+	<div>
+	{% block sidebar %}
+		{% get_category_list category %}
+	{% endblock %}
+	</div>
+	<div>
+	{% block body %}
+	{% endblock %}
+	</div>
+	<hr/>
+	<div>
+		<ul>
+{% if user.is_authenticated %}
+<!-- Show these links when the user is logged in -->
+
+<li><a href="{% url 'rango:add_category' %}">Add New Category</a></li>
+<li><a href="{% url 'auth_logout' %}">Logout</a></li>
+<li><a href="{% url 'auth_password_change' %}?next={% url 'rango:index' %}">Change password</a></li>
+{% else %}
+<!-- Show these links when the user is NOT logged in -->
+<li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+<li><a href="{% url 'auth_login' %}">Login</a></li>
+{% endif %}
+<!-- Outside the conditional statements, ALWAYS show -->
+
+<li><a href="{% url 'rango:index' %}">Index</a></li>
+		</ul>
+	</div>
+</body>
+</html>
